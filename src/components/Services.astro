@@ -1,0 +1,180 @@
+---
+import { master, servicesPsy, servicesMusic } from '../data/master';
+import CtaGroup from './CtaGroup.astro';
+---
+
+<section id="services" class="sv">
+  <div class="wrap">
+    <header class="section-head" data-reveal>
+      <span class="section-eyebrow">Цены</span>
+      <h2>Консультации, группы и&nbsp;музыкальные занятия.</h2>
+      <p>
+        Стоимость одной встречи. Записаться можно по&nbsp;телефону
+        <a href={master.phoneHref}>{master.phone}</a> или в&nbsp;WhatsApp.
+      </p>
+    </header>
+
+    <div class="cols">
+      <div class="block" data-reveal>
+        <h3 class="block-title">Психологическая помощь</h3>
+        <ul class="list">
+          {servicesPsy.map((s) => (
+            <li class="row">
+              <div class="row-main">
+                <span class="kind">{s.kind}</span>
+                <span class="name">{s.title}</span>
+                <span class="pitch">{s.pitch}</span>
+              </div>
+              <span class="price">{s.price}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="block block--music" data-reveal data-reveal-delay="120">
+        <h3 class="block-title">Музыка для детей и&nbsp;взрослых</h3>
+        <ul class="list">
+          {servicesMusic.map((s) => (
+            <li class="row">
+              <div class="row-main">
+                <span class="name">{s.title}</span>
+                <span class="pitch">{s.pitch}</span>
+              </div>
+              <span class="price">{s.price}</span>
+            </li>
+          ))}
+        </ul>
+        <div class="block-cta">
+          <CtaGroup variant="primary" tone="dark" />
+        </div>
+      </div>
+    </div>
+
+    <p class="foot" data-reveal>
+      Встречи проходят в&nbsp;кабинете: {master.city}, {master.address}.
+    </p>
+  </div>
+</section>
+
+<style>
+  .sv {
+    background: var(--bg);
+  }
+  .section-head {
+    max-width: 720px;
+    margin-bottom: 48px;
+  }
+  .section-head a {
+    color: var(--accent);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .cols {
+    display: grid;
+    grid-template-columns: 1.25fr 1fr;
+    gap: 20px;
+    align-items: start;
+  }
+  .block {
+    background: #ffffff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: clamp(24px, 3.4vw, 40px);
+  }
+  .block--music {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: #ffffff;
+  }
+  .block-title {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: clamp(22px, 2.2vw, 28px);
+    line-height: 1.2;
+    margin: 0 0 12px;
+    color: var(--ink);
+  }
+  .block--music .block-title {
+    color: #ffffff;
+  }
+  .list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 20px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .row:last-child {
+    border-bottom: 0;
+  }
+  .block--music .row {
+    border-color: rgba(255, 255, 255, 0.14);
+  }
+  .row-main {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+  }
+  .kind {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+  .name {
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+  .block--music .name {
+    color: #ffffff;
+  }
+  .pitch {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--ink-muted);
+  }
+  .block--music .pitch {
+    color: rgba(255, 255, 255, 0.72);
+  }
+  .price {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    color: var(--ink);
+    white-space: nowrap;
+    letter-spacing: -0.01em;
+  }
+  .block--music .price {
+    color: var(--accent-line);
+  }
+  .block-cta {
+    margin-top: 24px;
+  }
+  .foot {
+    margin-top: 32px;
+    text-align: center;
+    color: var(--ink-muted);
+    font-size: 14.5px;
+  }
+
+  @media (max-width: 960px) {
+    .cols {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 480px) {
+    .row {
+      flex-direction: column;
+      gap: 8px;
+    }
+  }
+</style>

@@ -1,0 +1,70 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+const imgs = import.meta.glob<{ default: ImageMetadata }>('/src/assets/gallery/*.jpg', { eager: true });
+const order = ['457239077', '457239061', '457239079', '457239066', '457239080', '457239059', '457239078'];
+const items = order
+  .map((id) => Object.entries(imgs).find(([p]) => p.includes(id))?.[1].default)
+  .filter((x): x is ImageMetadata => Boolean(x));
+---
+
+<section id="gallery" class="gl">
+  <div class="wrap">
+    <header class="section-head" data-reveal>
+      <span class="section-eyebrow">Занятия</span>
+      <h2>Музыка для&nbsp;всех: от&nbsp;малышей до&nbsp;сцены.</h2>
+      <p>
+        Музыкальное развитие, вокал, фортепиано и&nbsp;занятия с&nbsp;психологом.
+        Фото из&nbsp;сообщества «Музыка для всех».
+      </p>
+    </header>
+
+    <div class="cols">
+      {items.map((img, i) => (
+        <figure class="ph" data-reveal data-reveal-delay={Math.min(i * 60, 300)}>
+          <Image
+            src={img}
+            alt="Занятие в кабинете «Музыка для всех»"
+            widths={[360, 560, 760]}
+            sizes="(max-width: 600px) 90vw, 380px"
+            format="webp"
+            quality={82}
+            loading="lazy"
+          />
+        </figure>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .gl {
+    background: var(--bg-soft);
+  }
+  .cols {
+    columns: 3;
+    column-gap: 16px;
+  }
+  .ph {
+    margin: 0 0 16px;
+    break-inside: avoid;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #ffffff;
+    box-shadow:
+      0 1px 2px rgba(31, 25, 21, 0.05),
+      0 6px 20px rgba(31, 25, 21, 0.06);
+  }
+  .ph :global(img) {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  @media (max-width: 960px) {
+    .cols { columns: 2; }
+  }
+  @media (max-width: 520px) {
+    .cols { columns: 1; }
+  }
+</style>
