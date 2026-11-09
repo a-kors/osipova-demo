@@ -11,7 +11,7 @@ import { bioFacts, education } from '../data/master';
         src={aboutImg}
         alt="Ольга Осипова на развивающем занятии с детьми"
         widths={[480, 720, 960]}
-        sizes="(max-width: 860px) 280px, 420px"
+        sizes="(max-width: 860px) 440px, 460px"
         format="webp"
         quality={88}
         loading="lazy"
@@ -73,6 +73,8 @@ import { bioFacts, education } from '../data/master';
   }
   .photo {
     margin: 0;
+    position: sticky;
+    top: 96px;
   }
   .photo-img {
     object-position: 88% 50%;
@@ -162,6 +164,7 @@ import { bioFacts, education } from '../data/master';
       grid-template-columns: 1fr;
     }
     .photo {
+      position: static;
       max-width: 440px;
       width: 100%;
       margin: 0 auto;
