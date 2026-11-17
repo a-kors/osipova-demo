@@ -100,7 +100,7 @@ import CtaGroup from './CtaGroup.astro';
   :global(html.motion) .block--music > * {
     transition: opacity 0.4s ease 0.4s;
   }
-  :global(html.motion) .block--music:not(:global(.is-in)) > * {
+  :global(html.motion) .block--music:global(:not(.is-in)) > * {
     opacity: 0;
   }
   .block-title {
