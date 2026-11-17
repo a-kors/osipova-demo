@@ -31,7 +31,7 @@ import CtaGroup from './CtaGroup.astro';
         </ul>
       </div>
 
-      <div class="block block--music" data-reveal data-reveal-delay="120">
+      <div class="block block--music" data-reveal data-reveal-delay="0">
         <h3 class="block-title">Музыка для детей и&nbsp;взрослых</h3>
         <ul class="list">
           {servicesMusic.map((s) => (
@@ -85,6 +85,23 @@ import CtaGroup from './CtaGroup.astro';
     background: var(--ink);
     border-color: var(--ink);
     color: #ffffff;
+  }
+  /* выделенный блок: тёмный цвет растекается из середины, когда блок появляется */
+  :global(html.motion) .block--music {
+    background: radial-gradient(circle at 50% 55%, var(--ink) var(--fill-r), #ffffff calc(var(--fill-r) + 0.5%));
+    transition: --fill-r 0.8s cubic-bezier(0.55, 0, 0.25, 1) 0.05s, transform 1s cubic-bezier(0.2, 0.65, 0.2, 1), box-shadow 0.2s ease,
+      opacity 0.6s cubic-bezier(0.2, 0.65, 0.2, 1), border-color 0.4s ease 0.3s;
+    border-color: var(--line);
+  }
+  :global(html.motion) .block--music:global(.is-in) {
+    --fill-r: 110%;
+    border-color: var(--ink);
+  }
+  :global(html.motion) .block--music > * {
+    transition: opacity 0.4s ease 0.4s;
+  }
+  :global(html.motion) .block--music:not(:global(.is-in)) > * {
+    opacity: 0;
   }
   .block-title {
     font-family: var(--font-serif);
